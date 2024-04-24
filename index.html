@@ -37,13 +37,11 @@
   </style>
   <script>
   let prokot; 
-      window.onload=function(){ // Вешаются обработчики событий из кода на кнопки при загрузке окна
+      window.onload=function(){ 
           let kot1=document.querySelector(".kot1");
           kot1.onclick=LoadKot;
           let kot2=document.querySelector(".kot2");
           kot2.onclick=LoadKot;
-          let kot3=document.querySelector(".kot3");
-          kot3.onclick=LoadKot;
           prokot = document.querySelector(".prokotikov");
       }
       async function LoadKot() // Асинхронный метод для работы с промисами
@@ -52,13 +50,10 @@
 	       // Проверяется кто вызвал функцию через this - 
           if (this.classList.contains("kot1"))  url = 'kotik1.html'; 
           else if (this.classList.contains("kot2")) url = 'kotik2.html';// Если в сss классах кнопки написано kot2 то вызвать kotik2.html
-          else if (this.classList.contains("kot3")) url = 'kotik3.html';
           let response = await fetch(url); // Отправляем пеона за нашим файлом и прерываем метод
-          // Сюда мы попадаем, когда пеон вернулся с результатом
-          if (response.ok) { // если HTTP-статус в диапазоне 200-299 
-                 // получаем тело ответа (см. про этот метод ниже)
-                let html = await response.text();  // Отправляем пеона поискать текст ответа в объекте
-                prokot.innerHTML = html; // И когда найдет, то записываем текст в блок
+          if (response.ok) {  
+                let html = await response.text();
+                prokot.innerHTML = html; 
             } else {
                 alert("Ошибка HTTP: " + response.status); // Иначе громко ругаемся
             }
@@ -70,7 +65,6 @@
 	<br>
 	<div class="button kot2">Эспрессо</div>
 	<br>
-	<div class="button kot3">Американо</div>
 	
 	<div class="prokotikov"></div>
  </body>
